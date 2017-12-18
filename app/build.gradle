@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.example.asus.tongxun"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+        defaultConfig {
+            ndk {
+                //设置支持的SO库架构
+                abiFilters "armeabi-v7a", "x86","arm64-v8a","x86_64"
+            }
+        }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    testCompile 'junit:junit:4.12'
+    // 添加依赖。注意，版本号必须一致。
+    // 基础功能 (必需)
+    compile 'com.netease.nimlib:basesdk:4.4.0'
+    // 音视频和互动白板服务需要
+    compile 'com.netease.nimlib:nrtc:4.4.0'
+    // 音视频需要
+    compile 'com.netease.nimlib:avchat:4.4.0'
+    // 聊天室需要
+    compile 'com.netease.nimlib:chatroom:4.4.0'
+    // 互动白板服务需要
+    compile 'com.netease.nimlib:rts:4.4.0'
+    // 全文检索服务需要
+    compile 'com.netease.nimlib:lucene:4.4.0'
+    compile project(':library-demonstrate')
+}
